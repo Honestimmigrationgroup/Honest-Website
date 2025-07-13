@@ -1,13 +1,13 @@
 "use client"
 
+import { useEffect } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { ArrowRight, ChevronRight, Users, Star, MessageSquare, Zap } from "lucide-react"
+import TestimonialSlider from "@/components/testimonial-slider"
 import DestinationCarousel from "@/components/destination-carousel"
 import FloatingNavigation from "@/components/floating-navigation"
 import ServicesCarousel from "@/components/services-carousel"
-import TestimonialSlider from "@/components/testimonial-slider"
-import { ArrowRight, ChevronRight, MessageSquare, Star, Users, Zap } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useEffect } from "react"
 
 // Structured Data for SEO
 const structuredData = {
@@ -15,8 +15,8 @@ const structuredData = {
   "@type": "EducationalOrganization",
   name: "Honest Immigration Group",
   alternateName: "HIG Rajkot",
-  url: "https://honestimmigration.com",
-  logo: "https://honestimmigration.com/logo.png",
+  url: "https://www.honestimmigrationgroup.in",
+  logo: "https://www.honestimmigrationgroup.in/logo.png",
   description:
     "India's most trusted overseas education consultancy providing comprehensive study abroad services including counselling, test preparation, university selection, visa guidance, and more.",
   address: {
@@ -85,14 +85,14 @@ export default function Home() {
     return () => observer.disconnect()
   }, [])
 
-  // Golden Star Animation Effect
+  // Enhanced Golden Star Animation Effect with Increased Count
   useEffect(() => {
     const createGoldenStars = () => {
       const starsContainer = document.querySelector(".golden-stars-container")
       if (!starsContainer) return
 
-      // Create multiple golden stars
-      for (let i = 0; i < 12; i++) {
+      // Increased star count from 8 to 20 for more vibrant animation
+      for (let i = 0; i < 20; i++) {
         const star = document.createElement("div")
         star.className = "golden-star"
         star.innerHTML = "★"
@@ -100,10 +100,18 @@ export default function Home() {
         // Random positioning
         star.style.left = Math.random() * 100 + "%"
         star.style.top = Math.random() * 100 + "%"
-        star.style.fontSize = Math.random() * 1.5 + 0.8 + "rem"
+        star.style.fontSize = Math.random() * 1.8 + 0.6 + "rem"
+        star.style.color = "#ffd700"
+        star.style.position = "absolute"
+        star.style.pointerEvents = "none"
+        star.style.zIndex = "10"
 
-        // Random animation delay
-        star.style.animationDelay = Math.random() * 3 + "s"
+        // Random animation delay and duration for more variety
+        star.style.animationDelay = Math.random() * 4 + "s"
+        star.style.animationDuration = Math.random() * 3 + 2.5 + "s"
+
+        // Add random rotation for more dynamic effect
+        star.style.transform = `rotate(${Math.random() * 360}deg)`
 
         starsContainer.appendChild(star)
 
@@ -112,15 +120,15 @@ export default function Home() {
           if (star.parentNode) {
             star.parentNode.removeChild(star)
           }
-        }, 4000)
+        }, 6000)
       }
     }
 
     // Create initial stars
     createGoldenStars()
 
-    // Create stars periodically
-    const starsInterval = setInterval(createGoldenStars, 2500)
+    // Create stars more frequently for continuous effect
+    const starsInterval = setInterval(createGoldenStars, 2000)
 
     return () => {
       clearInterval(starsInterval)
@@ -144,26 +152,28 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="hero"
-        className="hero-section relative min-h-screen flex items-center justify-center pt-16 pb-0 overflow-hidden"
+        className="hero-section relative min-h-screen flex items-center justify-center pt-16 pb-20 overflow-hidden bg-gradient-to-r from-orange-500 via-blue-500 to-cyan-500"
       >
         {/* Golden Stars Animation Container */}
-        <div className="golden-stars-container"></div>
+        <div className="golden-stars-container absolute inset-0 pointer-events-none overflow-hidden z-10"></div>
 
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 relative z-20">
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
             <div className="lg:w-1/2 text-center lg:text-left">
-              <h1 className="hero-title-responsive font-bold mb-6 leading-tight">
-                <span className="hero-title-1 block text-orange-500">Your Dreams,</span>
-                <span className="hero-title-2 block">Our Expertise</span>
+              <h1 className="hero-title-responsive font-bold mb-6 leading-tight mx-auto lg:mx-0">
+                <span className="hero-title-1 block text-orange-500 text-3xl md:text-4xl lg:text-5xl">
+                  Your Dreams Into Reality
+                </span>
+                <span className="hero-title-2 block text-3xl md:text-4xl lg:text-5xl">Our Expertise Into Action</span>
               </h1>
-              <p className="hero-subtitle text-lg md:text-xl text-gray-700 mb-8 max-w-lg mx-auto lg:mx-0">
+              <p className="hero-subtitle text-lg md:text-xl text-gray-700 mb-8 max-w-lg mx-auto lg:mx-0 font-semibold">
                 Transform your educational aspirations into reality with India's most trusted overseas education
-                consultancy. We've guided over 1000+ students to their dream universities across 6 countries.
+                consultancy. We've guided over 2000+ students to their dream universities across 20+ countries.*
               </p>
               <div className="hero-buttons flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button
                   onClick={scrollToNextSection}
-                  className="btn-primary inline-flex items-center justify-center"
+                  className="btn-primary inline-flex items-center justify-center rounded-full"
                   aria-label="Explore our services"
                 >
                   Explore
@@ -171,7 +181,7 @@ export default function Home() {
                 </button>
                 <Link
                   href="/contact"
-                  className="btn-outline inline-flex items-center justify-center"
+                  className="btn-outline inline-flex items-center justify-center rounded-full"
                   aria-label="Start your study abroad journey"
                 >
                   Start your Journey
@@ -197,6 +207,8 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* Smoother Gradient Fade to Next Section */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-gray-50/30 to-gray-50 pointer-events-none"></div>
       </section>
 
       {/* Why Choose Us Section */}
