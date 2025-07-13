@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu } from "lucide-react"
@@ -9,6 +10,10 @@ const Navbar = () => {
   const [isFloatingOpen, setIsFloatingOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const pathname = usePathname()
+
+  // Check if we're on the homepage
+  const isHomepage = pathname === "/"
 
   useEffect(() => {
     // Check if mobile on mount and resize
@@ -59,7 +64,7 @@ const Navbar = () => {
           >
             <Link href="/" className="flex items-center h-full" onClick={() => window.scrollTo(0, 0)}>
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/images-Photoroom-WjhmHw0EOQAGOxBVwF6Ajzci54uA4H.png"
+                src={isHomepage ? "/honest-logo-white.png" : "/logo.png"}
                 alt="Honest Immigration Group Logo"
                 width={80}
                 height={32}
@@ -72,7 +77,9 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="font-bold text-sm tracking-wide transition-all duration-300 hover:text-orange-500 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-orange-500 after:transition-all after:duration-300 hover:after:w-full text-gray-800 uppercase flex items-center h-full"
+                  className={`font-bold text-sm tracking-wide transition-all duration-300 hover:text-orange-500 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-orange-500 after:transition-all after:duration-300 hover:after:w-full ${
+                    isHomepage ? "text-white" : "text-gray-800"
+                  } uppercase flex items-center h-full`}
                   onClick={() => window.scrollTo(0, 0)}
                 >
                   {link.name}
@@ -87,7 +94,7 @@ const Navbar = () => {
           <div className="flex justify-start items-center h-16 px-4 transition-all duration-300 relative z-40">
             <Link href="/" className="flex items-center h-full relative z-50" onClick={() => window.scrollTo(0, 0)}>
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/images-Photoroom-WjhmHw0EOQAGOxBVwF6Ajzci54uA4H.png"
+                src={isHomepage ? "/honest-logo-white.png" : "/logo.png"}
                 alt="Honest Immigration Group Logo"
                 width={60}
                 height={24}
