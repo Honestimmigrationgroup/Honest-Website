@@ -329,62 +329,35 @@ a,
   animation: enhanced-float 4s ease-in-out infinite;
 }
 
-/* Seamless section transitions */
+/* Seamless section transitions - adjusted spacing */
 .hero-section {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  padding-bottom: 100px; /* Extra padding to ensure shadow isn't cut off */
+  background: linear-gradient(to right, #f97316, #3b82f6, #06b6d4);
+  position: relative;
+}
+
+/* Hero text contrast improvements for gradient background */
+.hero-section .hero-title-1,
+.hero-section .hero-title-2 {
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-section .hero-subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .hero-to-section-blend {
   background: linear-gradient(to bottom, #f8fafc 0%, #f9fafb 50%, #f9fafb 100%);
-  margin-top: -100px; /* Pull up to overlap with hero section */
-  padding-top: 100px; /* Add padding to compensate for the overlap */
+  margin-top: -80px; /* Reduced overlap to give more space to why choose section */
+  padding-top: 100px; /* Adjusted padding to compensate */
 }
 
 .section-blend {
   background: linear-gradient(to bottom, #f9fafb 0%, #f9fafb 100%);
 }
 
-/* Fading gradient background for About Us page bottom */
-.about-fade-gradient {
-  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #f8fafc 60%, #3f51b5 100%);
-}
-
-/* Modern content styling for more depth */
-.about-content {
-  background: rgba(255,255,255,0.85);
-  border-radius: 1.5rem;
-  box-shadow: 0 8px 32px rgba(63,81,181,0.08), 0 1.5px 8px rgba(0,188,212,0.08);
-  padding: 2.5rem 2rem;
-  margin-bottom: 2rem;
-}
-.about-content h2, .about-content h3 {
-  color: #3f51b5;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-.about-content p {
-  color: #333;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-.about-content .highlight {
-  color: #ff7a00;
-  font-weight: 600;
-}
-
-/* Golden Star Glitter Animation */
-
-/* Modern Golden Blinking Stars Animation for Hero Section */
-.hero-gradient-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: linear-gradient(135deg, #ff7a00 0%, #3f51b5 50%, #00bcd4 100%);
-  opacity: 0.95;
-}
-
+/* Fixed Golden Star Animation */
 .golden-stars-container {
   position: absolute;
   top: 0;
@@ -393,41 +366,88 @@ a,
   height: 100%;
   pointer-events: none;
   overflow: hidden;
-  z-index: 2;
+  z-index: 10;
 }
 
 .golden-star {
   position: absolute;
   color: #ffd700;
-  font-size: 1.2rem;
-  opacity: 0.85;
-  filter: drop-shadow(0 0 10px #ffd700) brightness(1.2);
-  animation: golden-star-blink 1.2s infinite alternate, golden-star-float 4s infinite ease-in-out;
-  transition: opacity 0.3s, transform 0.3s;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+  animation: golden-star-sparkle 4s ease-in-out infinite;
+  pointer-events: none;
 }
 
+/* Fixed Golden Star Animations */
+@keyframes golden-star-sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg) translateY(20px);
+    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.3));
+  }
+  25% {
+    opacity: 0.8;
+    transform: scale(1) rotate(90deg) translateY(0px);
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8));
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3) rotate(180deg) translateY(-10px);
+    filter: drop-shadow(0 0 16px rgba(255, 215, 0, 1));
+  }
+  75% {
+    opacity: 0.6;
+    transform: scale(0.8) rotate(270deg) translateY(-5px);
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.2) rotate(360deg) translateY(-20px);
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.2));
+  }
+}
+
+/* Alternative star animations for variety */
 .golden-star:nth-child(2n) {
-  font-size: 1.6rem;
-  animation-delay: 0.3s, 0.5s;
-}
-.golden-star:nth-child(3n) {
-  font-size: 2rem;
-  animation-delay: 0.6s, 1s;
-}
-.golden-star:nth-child(4n) {
-  font-size: 1rem;
-  animation-delay: 0.9s, 1.5s;
+  animation: golden-star-twinkle 3.5s ease-in-out infinite;
 }
 
-@keyframes golden-star-blink {
-  0% { opacity: 0.7; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.3); }
-  100% { opacity: 0.7; transform: scale(1); }
+.golden-star:nth-child(3n) {
+  animation: golden-star-float 5s ease-in-out infinite;
+}
+
+@keyframes golden-star-twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+    filter: brightness(1.5) drop-shadow(0 0 10px rgba(255, 215, 0, 0.9));
+  }
 }
 
 @keyframes golden-star-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.4);
+  }
+  25% {
+    opacity: 0.7;
+    transform: translateY(10px) scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.1);
+  }
+  75% {
+    opacity: 0.8;
+    transform: translateY(5px) scale(0.8);
+  }
 }
 
 /* Mobile-first responsive design improvements */
@@ -467,6 +487,12 @@ a,
   /* Smaller golden stars on mobile */
   .golden-star {
     font-size: 0.8rem;
+  }
+
+  /* Adjust hero fade for mobile */
+  .hero-to-section-blend {
+    margin-top: -60px;
+    padding-top: 80px;
   }
 }
 
@@ -653,30 +679,3 @@ a,
 .animate-slow-zoom {
   animation: slow-zoom 20s ease-in-out infinite alternate;
 }
-
-/* Place this inside your hero section (e.g., in app/page.tsx or wherever your homepage hero is) */
-section.relative.py-20.overflow-hidden {
-  position: relative;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  overflow: hidden;
-}
-
-section.relative.py-20.overflow-hidden .absolute.inset-0.z-0 {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: linear-gradient(to bottom right, #ff7a00, #3f51b5);
-}
-
-section.relative.py-20.overflow-hidden .golden-stars-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 5;
-}
-
